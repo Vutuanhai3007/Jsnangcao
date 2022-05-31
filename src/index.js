@@ -13,10 +13,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Khởi tạo đối tượng router
 const router = new Navigo('/', {linksSelector: 'a'});
 
-const render = async (content) => {
+const render = async (content, id) => {
+    //content sẽ là toàn bộ componment
+    //cần thêm tham số truyền vào hàm này để truyền id cho những phần detail
     document.querySelector('#header').innerHTML = Header.render();
-    document.querySelector('#content').innerHTML = await content;
+    document.querySelector('#content').innerHTML = await content.render(id);
     document.querySelector('#footer').innerHTML = Footer.render();
+
+    //Sau khi content đã render xong thì afteRender đã được chạy
+    if(content.afterRender) {
+        content.afterRender();
+    }
 }
 
 router.on({
