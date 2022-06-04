@@ -7,31 +7,34 @@ import About from './pages/About';
 import News from './pages/News';
 import Student from './pages/Student';
 import StudentDetail from './pages/StudentDetail';
+import StudentAdd from './pages/StudentAdd';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 // Khởi tạo đối tượng router
-const router = new Navigo('/', {linksSelector: 'a'});
+const router = new Navigo('/', { linksSelector: 'a' });
 
 const render = async (content, id) => {
-    //content sẽ là toàn bộ componment
-    //cần thêm tham số truyền vào hàm này để truyền id cho những phần detail
+    // content sẽ là toàn bộ component
+    // cần thêm tham số vào hàm này để truyền id cho những phần detail
     document.querySelector('#header').innerHTML = Header.render();
     document.querySelector('#content').innerHTML = await content.render(id);
     document.querySelector('#footer').innerHTML = Footer.render();
 
-    //Sau khi content đã render xong thì afteRender đã được chạy
-    if(content.afterRender) {
+    // Sau khi content đã render xong thì afterRender mới được chạy
+    if (content.afterRender) {
         content.afterRender();
     }
-}
+};
 
 router.on({
-    '/': () => render(Home.render()),
-    '/about': () => render(About.render()),
-    '/news': () => render(News.render()),
-    '/students': () => render(Student.render()),
-    '/students/:id': (data) => render(StudentDetail.render(data.data.id)),
+    '/': () => render(Home),
+    '/about': () => render(About),
+    '/news': () => render(News),
+    '/students': () => render(Student),
+    '/students/add': () => render(StudentAdd),
+    '/students/detail/:id': (data) => render(StudentDetail, data.data.id),
+   
 });
 router.resolve();
 
@@ -50,12 +53,12 @@ const arrowRender = () => {
 const s = () => 2 + 3;
 
 function sum(a, b) {
-    return a+b;
+    return a + b;
 }; // cú pháp thông thường
 const sum1 = (a, b) => {
-    return a+b;
+    return a + b;
 }; // arrow function có return
-const sum2 = (a, b) => a+b; // nếu chỉ có return
+const sum2 = (a, b) => a + b; // nếu chỉ có return
 
 const display = a => console.log(a); // nếu chỉ có 1 tham số
 const display1 = a => alert(a);

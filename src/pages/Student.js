@@ -1,4 +1,5 @@
 import { getStudents, deleteStudent } from "../api/student";
+import reRender from '../helpers/reRender';
 
 const Student = {
     render: async () => { // đã đóng ngoặc nhọn phải có return ở trong
@@ -10,7 +11,7 @@ const Student = {
         // 3.2 sử dụng axios đã được khởi tạo và sinh ra hàm getStudents
         const response = await getStudents();
         // const data = response.data;
-        const { data } = response;
+        const {data} = response;
 
         // 4. lần đợi fetch đầu tiên sẽ trả về obj Response
         // console.log('response',response1, response2.data);
@@ -19,23 +20,45 @@ const Student = {
         // console.log('students', students);
 
         return `<div>
-        ${
-            data.map((student) => (
-                `<div>
-                    <div>ID: ${student.id}</div>
-                    <div>Name: ${student.name}</div>
-                    <div>MSV: ${student.msv}</div>
-                    <div>
-                        <a href="/students/${student.id}"><button class="btn btn-info">Chi tiết</button></a>
-                        <button class ='btn btn-danger'>Xóa</button>
-                </div>`
-            )).join('')
-        }
-    </div>`
+            ${
+                data.map((student) => (
+                    `<div>
+                        <div>ID: ${student.id}</div>
+                        <div>Name: ${student.name}</div>
+                        <div>MSV: ${student.msv}</div>
+                        <div>
+                            <a href="/students/${student.id}">
+                                <button class='btn btn-info'>Chi tiết</button>
+                            </a>
+                            <button
+                                class='btn btn-danger'
+                                data-id="${student.id}"
+                                data-name="${student.name}"
+                            >Xóa</button>
+                        </div>
+                    </div>`
+                )).join('')
+            }
+        </div>`
     },
-afterRender: () => {
+    afterRender: () => {
+        // Đây là nơi thực thi nghiệp vụ định nghĩa sự kiện xoá
+        // 1. Tìm toàn bộ nút xoá và thêm sự kiện click cho nó
+        const deleteBtns = document.querySelectorAll('.btn-danger');
+        deleteBtns.forEach((btn) => {
+            // addEventListener('tên sự kiện', khi sự kiện kích hoạt sẽ thực thi hàm)
+            btn.addEventListener('click', async () => {
+                // Tìm xem chúng ta muốn xoá thằng nào
+                // const data = btn.dataset; // {id: '', name: ''} với id ~ data-id, name ~ data-name
+                const btnId = btn.dataset.id;
+                // Thực hiện xoá
+                await deleteStudent(btnId);
+                // window.location.reload();
+                await reRender('#content', Student);
+            });
 
-}
+        });
+    }
 };
 
 
