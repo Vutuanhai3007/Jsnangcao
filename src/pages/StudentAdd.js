@@ -1,3 +1,5 @@
+import { createStudent } from '../api/student';
+ 
 const StudentAdd = {
     render: () => {
         return (
@@ -24,7 +26,7 @@ const StudentAdd = {
     },
     afterRender: () => {
         const submitBtn = document.querySelector('#btn');
-        submitBtn.addEventListener('click', () => {
+        submitBtn.addEventListener('click', async() => {
             const name = document.querySelector('#name').value;
             const msv = document.querySelector('#msv').value;
             const avatar = document.querySelector('#avatar').value;
@@ -37,6 +39,8 @@ const StudentAdd = {
             const submitData = {name, msv, avatar};
             // createStudent(submitData);
             console.log(submitData);
+            createStudent(submitData);
+            window.location.replace('/students');
         });
     }
 };
