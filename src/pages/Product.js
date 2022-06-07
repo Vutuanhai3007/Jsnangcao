@@ -30,7 +30,7 @@ const Product = {
                             <div>Price: ${product.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</div>
                             <div>Status: ${product.status == true ? 'Hiển thị' : 'Ẩn'}</div>
                             <div>
-                                <a href="/product/detail/${product.id}"><button class="btn btn-info">Chi tiết</button></a>
+                                <a href="products/detail/${product.id}"><button class="btn btn-info">Chi tiết</button></a>
                                 <button class='btn btn-danger'
                                 data-id="${product.id}"
                                 id="delete"
