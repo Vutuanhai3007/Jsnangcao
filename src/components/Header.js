@@ -1,4 +1,5 @@
 import Nav from './Nav';
+import Cart from './Cart';
 
 const HeaderB = {
     render: () => (
@@ -36,6 +37,7 @@ const HeaderB = {
            
           </a>
 
+
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
               <a href="#" class="nav-link text-secondary">
@@ -67,6 +69,7 @@ const HeaderB = {
                 Liên Hệ
               </a>
             </li>
+            
           </ul>
         </div>
       </div>
@@ -83,6 +86,7 @@ const HeaderB = {
         </div>
       </div>
     </div>
+    <div id='cart'>${Cart.render()}</div>
   </header>`
     )
 }

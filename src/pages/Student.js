@@ -26,9 +26,13 @@ const Student = {
                         <div>ID: ${student.id}</div>
                         <div>Name: ${student.name}</div>
                         <div>MSV: ${student.msv}</div>
+                        <div>Avatar: ${student.avatar}</div>
                         <div>
                             <a href="/students/${student.id}">
                                 <button class='btn btn-info'>Chi tiết</button>
+                            </a>
+                            <a href="/students/edit/${student.id}">
+                                <button class='btn btn-warning'>Chỉnh sửa</button>
                             </a>
                             <button
                                 class='btn btn-danger'
