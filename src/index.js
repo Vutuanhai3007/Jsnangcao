@@ -9,15 +9,14 @@ import Student from './pages/Student';
 import StudentDetail from './pages/StudentDetail';
 import StudentAdd from './pages/StudentAdd';
 
-import Product from './pages/Product';
-import ProductDetail from './pages/ProductDetail';
-import ProductAdd from './pages/ProductAdd';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Khởi tạo đối tượng router
 // const router = new Navigo('/', { linksSelector: 'a' });
+// router.navigate('/students');
 import router from './helpers/router';
+import CartDetail from './pages/CartDetail';
+
 const render = async (content, id) => {
     // content sẽ là toàn bộ component
     // cần thêm tham số vào hàm này để truyền id cho những phần detail
@@ -27,7 +26,7 @@ const render = async (content, id) => {
 
     // Sau khi content đã render xong thì afterRender mới được chạy
     if (content.afterRender) {
-        content.afterRender();
+        content.afterRender(id);
     }
 };
 
@@ -39,11 +38,7 @@ router.on({
     '/students/:id': (data) => render(StudentDetail, data.data.id),
     '/students/add': () => render(StudentAdd),
     '/students/edit/:id': (data) => render(StudentAdd, data.data.id),
-    '/products': () => render(Product),
-    '/products/add': () => render(ProductAdd),
-    '/products/detail/:id': (data) => render(ProductDetail, data.data.id),
-
-   
+    '/cart-detail': () => render(CartDetail)
 });
 router.resolve();
 

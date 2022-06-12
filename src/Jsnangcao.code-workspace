@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "..\\..\\Assignment"
+		},
+		{
+			"path": "..\\..\\..\\..\\Music\\assignment"
+		},
+		{
+			"path": "..\\..\\..\\..\\..\\..\\xampp\\htdocs\\WEB17101_PHP2"
+		},
+		{
+			"path": "..\\..\\..\\..\\Downloads\\ASM_JavaScript-main"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "junno"
+	}
+}
